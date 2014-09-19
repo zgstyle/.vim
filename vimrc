@@ -1,14 +1,42 @@
-" Initialize pathogen
-call pathogen#infect()
-call pathogen#helptags()
+" Required by Vundel
+set nocompatible          " get out of horrible vi-compatible mode
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" Required! 
+Bundle 'gmarik/vundle'
+
+" My Bundles here:
+" original repos on github
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'ap/vim-css-color'
+Bundle 'bling/vim-airline'
+Bundle 'evidens/vim-twig'
+Bundle 'godlygeek/tabular'
+Bundle 'kien/ctrlp.vim'
+Bundle 'mattn/emmet-vim'
+Bundle 'mileszs/ack.vim'
+Bundle 'myusuf3/numbers.vim'
+Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-surround'
+"
+" " Github repos of the user 'vim-scripts'
+" " => can omit the username part
+" Bundle 'L9'
+" Bundle 'FuzzyFinder'
+"
+" " non github repos
+" Bundle 'git://git.wincent.com/command-t.git'
+" ...
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible          " get out of horrible vi-compatible mode
+filetype plugin indent on "detect the type of file and load filetype plugins
 set encoding=utf-8        " always use UTF-8
 set ffs=unix,dos,mac      " support all three, in this order
-filetype plugin indent on "detect the type of file and load filetype plugins
 set history=1000          " How many lines of history to remember
 set cf                    " enable error files and error jumping
 set clipboard+=unnamed    " turns out I do like is sharing windows clipboard
