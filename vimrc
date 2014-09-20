@@ -1,12 +1,12 @@
 " Required by Vundel
 set nocompatible          " get out of horrible vi-compatible mode
 filetype off
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 
 " let Vundle manage Vundle
 " Required! 
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 " My Bundles here:
 " original repos on github
@@ -64,6 +64,7 @@ let g:netrw_banner=0        " Hide ifo banner on startup
 " let g:netrw_browse_split=4 " Open in previous window
 " let g:netrw_hide=1        " Show not-hidden files
 " let g:netrw_keepdir=0       " Keep the current directory the same as the browsing directory
+" Does not work with older versions of netrw
 let g:netrw_list_hide= netrw_gitignore#Hide() . '^\.svn\/$' " Hide gitignore & svn folders
 let g:netrw_liststyle=3
 let g:netrw_preview=1       " Make vertical splitting the default for previewing files
