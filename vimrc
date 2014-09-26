@@ -1,24 +1,29 @@
 " Required by Vundel
 set nocompatible          " get out of horrible vi-compatible mode
 filetype off
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle
-" Required! 
-Plugin 'gmarik/vundle'
+" Required!
+Plugin 'gmarik/Vundle.vim'
 
 " My Bundles here:
 " original repos on github
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'ap/vim-css-color'
 Plugin 'bling/vim-airline'
+" It looks like supertab doesn't work in tmux
+"Plugin 'ervandew/supertab'
 Plugin 'evidens/vim-twig'
 Plugin 'godlygeek/tabular'
+Plugin 'gorodinskiy/vim-coloresque'
+Plugin 'henrik/vim-indexed-search'
+Plugin 'joshtronic/php.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'myusuf3/numbers.vim'
+Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
@@ -97,8 +102,7 @@ set viewdir=~/.vim/myfiles/view     " Save view files here
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim UI
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set lsp=1               " space it out a little more (easier to read)
-set wildmode=list:longest "
+set lsp=1               " space it out a little more (easier to read)
 set ruler               " Always show current positions along the bottom
 set cmdheight=2         " the command bar is 2 high
 set number              " turn on line numbers
@@ -125,9 +129,6 @@ set incsearch           " do highlight as you type you search phrase
 set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\
 "set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:¬ " what to show when I hit :set list
 set so=2                " Keep 5 lines (top/bottom) for scope
-" set statusline=%<%f\ %=\:\b%n%y%m%r%w\ %l,%c%V\ %P
-" set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
-" set statusline=%F%m%r%h%w\ [%{&ff}/%Y]\ [BN=%n]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 set laststatus=2        " always show the status line
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Wildmenu
