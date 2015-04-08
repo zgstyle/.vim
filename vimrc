@@ -11,23 +11,32 @@ Plugin 'gmarik/Vundle.vim'
 
 " My Bundles here:
 " original repos on github
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
 " It looks like supertab doesn't work in tmux
 "Plugin 'ervandew/supertab'
+" Plugin 'scrooloose/syntastic'
+" Plugin 'Shougo/neocomplcache'
+" Plugin 'Shougo/neosnippet'
+" Plugin 'Shougo/neosnippet-snippets'
+" Plugin 'gorodinskiy/vim-coloresque'
+
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'ap/vim-css-color'
+Plugin 'bling/vim-airline'
 Plugin 'evidens/vim-twig'
 Plugin 'godlygeek/tabular'
-Plugin 'gorodinskiy/vim-coloresque'
 Plugin 'henrik/vim-indexed-search'
 Plugin 'joshtronic/php.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'mileszs/ack.vim'
+Plugin 'miyakogi/conoline.vim'
 Plugin 'myusuf3/numbers.vim'
-Plugin 'scrooloose/syntastic'
+Plugin 'tmhedberg/matchit'
+Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'vim-scripts/TaskList.vim'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
 "
@@ -62,7 +71,7 @@ set background=dark       " we use dark background
 colo solarized
 
 if !has("gui_running")
-    set t_Co=256
+set t_Co=256
 endif
 
 " Default netrw tree mode
@@ -71,22 +80,23 @@ let g:netrw_banner=0        " Hide ifo banner on startup
 " let g:netrw_hide=1        " Show not-hidden files
 " let g:netrw_keepdir=0       " Keep the current directory the same as the browsing directory
 " Does not work with older versions of netrw
-let g:netrw_list_hide= netrw_gitignore#Hide() . '^\.svn\/$' " Hide gitignore & svn folders
+"let g:netrw_list_hide= netrw_gitignore#Hide() " Hide gitignore & svn folders
+let g:netrw_list_hide= netrw_gitignore#Hide() . '^\.svn\/$, ^\.sass-cache\/$' " Hide gitignore & svn folders
 let g:netrw_liststyle=3
 let g:netrw_preview=1       " Make vertical splitting the default for previewing files
 " let g:netrw_winsize=30    " Split size in %
 
 " Powerline fancy symbols
-let g:Powerline_symbols = 'fancy'
+let g:airline_powerline_fonts = 1
 
 " let g:solarized_termcolors=256
-let g:solarized_termtrans = 1
+" let g:solarized_termtrans = 1
 
 " CTRLp Exclude from search
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|\.sass-cache$'
 
-" Zencoding
-let g:user_zen_leader_key = '<c-y>'
+" Emmet trigger key
+let g:user_emmet_leader_key = '<C-Y>'
 
 " Session management
 let g:session_directory = '~/.vim/myfiles/sessions'    " all sessions lives here
@@ -121,6 +131,13 @@ set nosol               " leave my cursor where it was
 set novisualbell
 set noerrorbells
 set diffopt=vertical    " Start diff mode in vertical splits
+
+" Auto enable cursor line plugin (conoline)
+let g:conoline_auto_enable = 1
+" Use colorscheme in both modes
+let g:conoline_use_colorscheme_default_normal=1
+let g:conoline_use_colorscheme_default_insert=1
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual Cues
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -140,6 +157,7 @@ if has("wildmenu")
     set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
     set wildignore+=.DS_Store,.git,.hg,.svn
     set wildignore+=*~,*.swp,*.tmp
+    set wildignore+=templates/compiled/**
     set wildmenu
     set wildmode=longest,list
 endif
@@ -153,7 +171,7 @@ set tabstop=4             " real tabs should be 4, but they will show with set l
 set softtabstop=4         " unify
 set shiftwidth=4          " unify
 set shiftround            " when at 3 spaces, and I hit > ... go to 4, not 5
-set copyindent            " but above all -- follow the conventions laid before us
+" set copyindent            " but above all -- follow the conventions laid before us
 " set preserveindent        " but above all -- follow the conventions laid before us
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text Formatting/Layout
@@ -165,7 +183,7 @@ set smartcase             " if there are caps, go case-sensitive
 "set completeopt=menu,longest,preview " improve the way autocomplete works
 set completeopt=longest,menuone
 set cursorcolumn          " show the current column
-set cursorline            " show the current line
+"set cursorline            " show the current line
 set mps+=<:>              " These are pairs in HTML
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Folding - enable folding, but by default make it act like folding is off
@@ -214,6 +232,11 @@ nnoremap <F3> :NumbersToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Disable the highlights when you enter insertmode and will turn them back on
+" when you leave insertmode
+autocmd InsertEnter * :setlocal nohlsearch
+autocmd InsertLeave * :setlocal hlsearch
+
 au BufEnter * :syntax sync fromstart " ensure every file does syntax highlighting (full)
 " Dont use cindent for CSS
 au BufEnter *.scss set nocindent
