@@ -13,12 +13,12 @@ Plugin 'gmarik/Vundle.vim'
 " original repos on github
 " It looks like supertab doesn't work in tmux
 "Plugin 'ervandew/supertab'
-" Plugin 'scrooloose/syntastic'
 " Plugin 'Shougo/neocomplcache'
 " Plugin 'Shougo/neosnippet'
 " Plugin 'Shougo/neosnippet-snippets'
 " Plugin 'gorodinskiy/vim-coloresque'
 
+Plugin 'ajh17/VimCompletesMe'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'ap/vim-css-color'
 Plugin 'bling/vim-airline'
@@ -31,6 +31,7 @@ Plugin 'mattn/emmet-vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'miyakogi/conoline.vim'
 Plugin 'myusuf3/numbers.vim'
+Plugin 'scrooloose/syntastic'
 Plugin 'tmhedberg/matchit'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-haml'
@@ -93,7 +94,7 @@ let g:airline_powerline_fonts = 1
 " let g:solarized_termtrans = 1
 
 " CTRLp Exclude from search
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|\.sass-cache$'
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|\.sass-cache$\|app\/cache'
 
 " Emmet trigger key
 let g:user_emmet_leader_key = '<C-Y>'
@@ -101,7 +102,7 @@ let g:user_emmet_leader_key = '<C-Y>'
 " Session management
 let g:session_directory = '~/.vim/myfiles/sessions'    " all sessions lives here
 let g:session_autoload = 'no'
-let g:session_autosave = 'yes'
+let g:session_autosave = 'no'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files/Backups
@@ -129,8 +130,9 @@ set report=0            " tell us when anything is changed via :...
 "set fillchars=vert:\ ,stl:\ ,stlnc:\
 set nosol               " leave my cursor where it was
 set novisualbell
-set noerrorbells
+set noerrorbells        " don't beep
 set diffopt=vertical    " Start diff mode in vertical splits
+set title               " change terminal's title
 
 " Auto enable cursor line plugin (conoline)
 let g:conoline_auto_enable = 1
@@ -166,12 +168,12 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set ai                    " autoindent (filetype indenting instead)
 set si                    " smartindent (filetype indenting instead)
+set copyindent            " but above all -- follow the conventions laid before us
 set expandtab
 set tabstop=4             " real tabs should be 4, but they will show with set list on
 set softtabstop=4         " unify
 set shiftwidth=4          " unify
 set shiftround            " when at 3 spaces, and I hit > ... go to 4, not 5
-" set copyindent            " but above all -- follow the conventions laid before us
 " set preserveindent        " but above all -- follow the conventions laid before us
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text Formatting/Layout
@@ -220,10 +222,12 @@ map <leader>tl <Plug>TaskList
 
 " Switch buffers
 map <down> <ESC>:bn<CR> " right arrow (normal mode) switches buffers  (excluding minibuf)
-map <up> <ESC>:bp<CR>  " left arrow (normal mode) switches buffers (excluding minibuf)
+map <up> <ESC>:bp<CR>   " left arrow (normal mode) switches buffers (excluding minibuf)
 
 " Toggle relative numbering
 nnoremap <F3> :NumbersToggle<CR>
+" Toggle paste mode
+set pastetoggle=<F2>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Experimental
