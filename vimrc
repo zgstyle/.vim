@@ -5,20 +5,19 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" let Vundle manage Vundle
-" Required!
+" Required! let Vundle manage Vundle
 Plugin 'gmarik/Vundle.vim'
 
-" My Bundles here:
-" original repos on github
 " It looks like supertab doesn't work in tmux
-"Plugin 'ervandew/supertab'
+" Plugin 'ervandew/supertab'
 " Plugin 'Shougo/neocomplcache'
 " Plugin 'Shougo/neosnippet'
 " Plugin 'Shougo/neosnippet-snippets'
 " Plugin 'gorodinskiy/vim-coloresque'
-
-Plugin 'ajh17/VimCompletesMe'
+" Plugin 'ajh17/VimCompletesMe' " does not work for me :(
+" Plugin 'othree/yajs.vim' " Heavy plugin
+" Plugin 'scrooloose/syntastic' " Annoying
+" Plugin 'Valloric/YouCompleteMe' " requires python 2.0 support
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'ap/vim-css-color'
 Plugin 'bling/vim-airline'
@@ -28,11 +27,12 @@ Plugin 'henrik/vim-indexed-search'
 Plugin 'joshtronic/php.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
+Plugin 'mephux/vim-jsfmt'
 Plugin 'mileszs/ack.vim'
 Plugin 'miyakogi/conoline.vim'
 Plugin 'myusuf3/numbers.vim'
-Plugin 'scrooloose/syntastic'
 Plugin 'tmhedberg/matchit'
+Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-surround'
@@ -104,6 +104,10 @@ let g:session_directory = '~/.vim/myfiles/sessions'    " all sessions lives here
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'
 
+" Syntastic settings
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0     " Dont check on save or quit
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files/Backups
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -154,6 +158,10 @@ set laststatus=2        " always show the status line
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Wildmenu
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Make the Enter key select set wildmenu completion entry instead of creating
+" a new line
+"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
 if has("wildmenu")
     set wildignore+=*.a,*.o
     set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
@@ -166,15 +174,15 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Indent Related
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set ai                    " autoindent (filetype indenting instead)
-set si                    " smartindent (filetype indenting instead)
-set copyindent            " but above all -- follow the conventions laid before us
+set ai             "  autoindent (filetype indenting instead)
+set si             "  smartindent (filetype indenting instead)
+set copyindent     " but above all -- follow the conventions laid before us
+set preserveindent " but above all -- follow the conventions laid before us
 set expandtab
-set tabstop=4             " real tabs should be 4, but they will show with set list on
-set softtabstop=4         " unify
-set shiftwidth=4          " unify
-set shiftround            " when at 3 spaces, and I hit > ... go to 4, not 5
-" set preserveindent        " but above all -- follow the conventions laid before us
+set tabstop=4      " real tabs should be 4, but they will show with set list on
+set softtabstop=4  " unify
+set shiftwidth=4   " unify
+set shiftround     " when at 3 spaces, and I hit > ... go to 4, not 5
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text Formatting/Layout
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -182,6 +190,7 @@ set shiftround            " when at 3 spaces, and I hit > ... go to 4, not 5
 set wrap                  " wrap lines
 set ignorecase            " case insensitive by default
 set smartcase             " if there are caps, go case-sensitive
+set complete=.,w,b,u,t,
 "set completeopt=menu,longest,preview " improve the way autocomplete works
 set completeopt=longest,menuone
 set cursorcolumn          " show the current column
@@ -251,12 +260,12 @@ au BufRead,BufNewFile *.haml,*.sass,*.scss setlocal  shiftwidth=2
 au FileType sass,scss setlocal fdm=marker
 au FileType haml setlocal foldmethod=indent
 au FileType erb setlocal foldmethod=manual
-au FileType python setlocal omnifunc=pythoncomplete#Complete
-au FileType php setlocal omnifunc=phpcomplete#CompletePHP
-au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-au FileType html setlocal omnifunc=htmlcomplete#CompleteTags
-au FileType css setlocal omnifunc=csscomplete#CompleteCSS
-au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" au FileType python setlocal omnifunc=pythoncomplete#Complete
+" au FileType php setlocal omnifunc=phpcomplete#CompletePHP
+" au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" au FileType html setlocal omnifunc=htmlcomplete#CompleteTags
+" au FileType css setlocal omnifunc=csscomplete#CompleteCSS
+" au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Useful abbrevs
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
