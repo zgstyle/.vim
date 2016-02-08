@@ -23,14 +23,15 @@ Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'fxn/vim-monochrome'
 
 " SYNTAX
-Plug 'ap/vim-css-color'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'tpope/vim-git', { 'for': 'git' }
+Plug 'ap/vim-css-color', { 'for': 'css' }
+Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 Plug 'evidens/vim-twig', { 'for': 'twig' }
 Plug 'joshtronic/php.vim', { 'for': 'php' }
+Plug 'tpope/vim-git', { 'for': 'git' }
+Plug 'tpope/vim-haml', { 'for': 'haml' }
 
 " COMPLETION
-Plug 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim', { 'for': 'html' }
 Plug 'Shougo/neocomplete.vim'
 
 " Make % match xml tags
@@ -40,19 +41,22 @@ Plug 'tmhedberg/matchit', { 'for': ['html', 'xml'] }
 Plug 'godlygeek/tabular'
 
 " STATUSLINE
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" Searching
+Plug 'rking/ag.vim'
 Plug 'henrik/vim-indexed-search'
+
+" Other
 Plug 'kien/ctrlp.vim'
 Plug 'mephux/vim-jsfmt'
-Plug 'mileszs/ack.vim'
+" Plug 'mileszs/ack.vim'
 Plug 'miyakogi/conoline.vim'
 Plug 'myusuf3/numbers.vim'
-Plug 'tmhedberg/matchit'
+Plug 'tmhedberg/matchit', { 'for': ['html', 'xml'] }
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-haml'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/TaskList.vim'
