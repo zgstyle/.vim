@@ -1,57 +1,68 @@
-" Required by Vundle
 set nocompatible          " get out of horrible vi-compatible mode
-filetype off
+" ----------------------------------------------------------------------------
+"   Plug
+" ----------------------------------------------------------------------------
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Install vim-plug if we don't arlready have it
+if empty(glob("~/.vim/autoload/plug.vim"))
+    " Ensure all needed directories exist  (Thanks @kapadiamush)
+    execute 'mkdir -p ~/.vim/plugged'
+    execute 'mkdir -p ~/.vim/autoload'
+    " Download the actual plugin manager
+    execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+endif
 
-" Required! let Vundle manage Vundle
-Plugin 'gmarik/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
-" It looks like supertab doesn't work in tmux
-" Plugin 'ervandew/supertab'
-" Plugin 'Shougo/neocomplcache'
-" Plugin 'Shougo/neosnippet'
-" Plugin 'Shougo/neosnippet-snippets'
-" Plugin 'gorodinskiy/vim-coloresque'
-" Plugin 'ajh17/VimCompletesMe' " does not work for me :(
-" Plugin 'othree/yajs.vim' " Heavy plugin
-" Plugin 'scrooloose/syntastic' " Annoying
-" Plugin 'Valloric/YouCompleteMe' " requires python 2.0 support
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'ap/vim-css-color'
-Plugin 'bling/vim-airline'
-Plugin 'evidens/vim-twig'
-Plugin 'godlygeek/tabular'
-Plugin 'henrik/vim-indexed-search'
-Plugin 'joshtronic/php.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'mattn/emmet-vim'
-Plugin 'mephux/vim-jsfmt'
-Plugin 'mileszs/ack.vim'
-Plugin 'miyakogi/conoline.vim'
-Plugin 'myusuf3/numbers.vim'
-Plugin 'tmhedberg/matchit'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-haml'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'vim-scripts/TaskList.vim'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-session'
-"
-" " Github repos of the user 'vim-scripts'
-" " => can omit the username part
-" Plugin 'L9'
-" Plugin 'FuzzyFinder'
-"
-" " non github repos
-" Plugin 'git://git.wincent.com/command-t.git'
-" ...
+" COLORSCHEMES 
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'altercation/vim-colors-solarized'
+Plug 'captbaritone/molokai'
+Plug 'chriskempson/base16-vim'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'fxn/vim-monochrome'
 
-call vundle#end()           " required
+" SYNTAX
+Plug 'ap/vim-css-color'
+Plug 'tpope/vim-git', { 'for': 'git' }
+Plug 'evidens/vim-twig', { 'for': 'twig' }
+Plug 'joshtronic/php.vim', { 'for': 'php' }
+
+" COMPLETION
+Plug 'mattn/emmet-vim'
+Plug 'Shougo/neocomplete.vim'
+
+" Make % match xml tags
+Plug 'tmhedberg/matchit', { 'for': ['html', 'xml'] }
+
+" INDENTATION
+Plug 'godlygeek/tabular'
+
+" STATUSLINE
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'henrik/vim-indexed-search'
+Plug 'kien/ctrlp.vim'
+Plug 'mephux/vim-jsfmt'
+Plug 'mileszs/ack.vim'
+Plug 'miyakogi/conoline.vim'
+Plug 'myusuf3/numbers.vim'
+Plug 'tmhedberg/matchit'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-scripts/TaskList.vim'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
+
 filetype plugin indent on   " required (detect the type of file and load filetype plugins)
+call plug#end()
+
+" Enable neocomplete at start
+let g:neocomplete#enable_at_startup = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
@@ -77,14 +88,20 @@ endif
 
 " Default netrw tree mode
 let g:netrw_banner=0        " Hide ifo banner on startup
+let g:netrw_list_hide= netrw_gitignore#Hide() . '^\.svn\/$, ^\.sass-cache\/$' " Hide gitignore & svn folders
+let g:netrw_altv          = 1
+let g:netrw_fastbrowse    = 2
+let g:netrw_keepdir       = 0
+let g:netrw_liststyle     = 0
+let g:netrw_retmap        = 1
+let g:netrw_silent        = 1
+let g:netrw_special_syntax= 1
 " let g:netrw_browse_split=4 " Open in previous window
 " let g:netrw_hide=1        " Show not-hidden files
 " let g:netrw_keepdir=0       " Keep the current directory the same as the browsing directory
 " Does not work with older versions of netrw
-"let g:netrw_list_hide= netrw_gitignore#Hide() " Hide gitignore & svn folders
-let g:netrw_list_hide= netrw_gitignore#Hide() . '^\.svn\/$, ^\.sass-cache\/$' " Hide gitignore & svn folders
-let g:netrw_liststyle=3
-let g:netrw_preview=1       " Make vertical splitting the default for previewing files
+" let g:netrw_list_hide= netrw_gitignore#Hide() " Hide gitignore & svn folders
+" let g:netrw_preview=1       " Make vertical splitting the default for previewing files
 " let g:netrw_winsize=30    " Split size in %
 
 " Powerline fancy symbols
@@ -94,7 +111,7 @@ let g:airline_powerline_fonts = 1
 " let g:solarized_termtrans = 1
 
 " CTRLp Exclude from search
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$|\.sass-cache$\|app\/cache'
+let g:ctrlp_custom_ignore = 'node_modules\|\.git$\|\.hg$\|\.svn$\|\.sass-cache$\|app\/cache'
 
 " Emmet trigger key
 let g:user_emmet_leader_key = '<C-Y>'
@@ -162,15 +179,15 @@ set laststatus=2        " always show the status line
 " a new line
 "inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-if has("wildmenu")
-    set wildignore+=*.a,*.o
-    set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
-    set wildignore+=.DS_Store,.git,.hg,.svn
-    set wildignore+=*~,*.swp,*.tmp
-    set wildignore+=templates/compiled/**
-    set wildmenu
-    set wildmode=longest,list
-endif
+" if has("wildmenu")
+"     set wildignore+=*.a,*.o
+"     set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
+"     set wildignore+=.DS_Store,.git,.hg,.svn
+"     set wildignore+=*~,*.swp,*.tmp
+"     set wildignore+=templates/compiled/**
+"     set wildmenu
+"     set wildmode=longest,list
+" endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Indent Related
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -252,8 +269,8 @@ autocmd InsertLeave * :setlocal hlsearch
 
 au BufEnter * :syntax sync fromstart " ensure every file does syntax highlighting (full)
 " Dont use cindent for CSS
-au BufEnter *.scss set nocindent
-au BufLeave *.scss set cindent
+" au BufEnter *.scss set nocindent
+" au BufLeave *.scss set cindent
 au BufRead,BufNewFile *.haml,*.sass,*.scss setlocal softtabstop=2
 au BufRead,BufNewFile *.haml,*.sass,*.scss setlocal  shiftwidth=2
 " We use special settings for HAML SCSS and SASS fieles
