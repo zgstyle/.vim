@@ -24,6 +24,7 @@ Plug 'fxn/vim-monochrome'
 
 " SYNTAX
 Plug 'ap/vim-css-color'
+Plug 'cakebaker/scss-syntax.vim'
 Plug 'tpope/vim-git', { 'for': 'git' }
 Plug 'evidens/vim-twig', { 'for': 'twig' }
 Plug 'joshtronic/php.vim', { 'for': 'php' }
@@ -125,6 +126,20 @@ let g:session_autosave = 'no'
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0     " Dont check on save or quit
 
+" Auto enable cursor line plugin (conoline)
+let g:conoline_auto_enable = 1
+" Use colorscheme in both modes
+let g:conoline_use_colorscheme_default_normal=1
+let g:conoline_use_colorscheme_default_insert=1
+
+" Neocomplete settings
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 2
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files/Backups
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -154,12 +169,6 @@ set novisualbell
 set noerrorbells        " don't beep
 set diffopt=vertical    " Start diff mode in vertical splits
 set title               " change terminal's title
-
-" Auto enable cursor line plugin (conoline)
-let g:conoline_auto_enable = 1
-" Use colorscheme in both modes
-let g:conoline_use_colorscheme_default_normal=1
-let g:conoline_use_colorscheme_default_insert=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual Cues
@@ -277,10 +286,11 @@ au BufRead,BufNewFile *.haml,*.sass,*.scss setlocal  shiftwidth=2
 au FileType sass,scss setlocal fdm=marker
 au FileType haml setlocal foldmethod=indent
 au FileType erb setlocal foldmethod=manual
+" Enable omnicomplete
+au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+au FileType html setlocal omnifunc=htmlcomplete#CompleteTags
 " au FileType python setlocal omnifunc=pythoncomplete#Complete
 " au FileType php setlocal omnifunc=phpcomplete#CompletePHP
-" au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-" au FileType html setlocal omnifunc=htmlcomplete#CompleteTags
 " au FileType css setlocal omnifunc=csscomplete#CompleteCSS
 " au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
