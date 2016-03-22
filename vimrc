@@ -14,7 +14,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" COLORSCHEMES 
+" COLORSCHEMES
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'altercation/vim-colors-solarized'
 Plug 'captbaritone/molokai'
@@ -25,17 +25,17 @@ Plug 'fxn/vim-monochrome'
 " SYNTAX
 Plug 'ap/vim-css-color', { 'for': 'css' }
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
-Plug 'evidens/vim-twig', { 'for': 'twig' }
+Plug 'evidens/vim-twig' ", { 'for': ['html', 'php', 'twig'] }
 Plug 'joshtronic/php.vim', { 'for': 'php' }
 Plug 'tpope/vim-git', { 'for': 'git' }
 Plug 'tpope/vim-haml', { 'for': 'haml' }
 
 " COMPLETION
-Plug 'mattn/emmet-vim', { 'for': 'html' }
+Plug 'mattn/emmet-vim' ", { 'for': ['html', 'php', 'twig'] }
 Plug 'Shougo/neocomplete.vim'
 
 " Make % match xml tags
-Plug 'tmhedberg/matchit', { 'for': ['html', 'xml'] }
+Plug 'tmhedberg/matchit' " , { 'for': ['html', 'xml', 'twig'] }
 
 " INDENTATION
 Plug 'godlygeek/tabular'
@@ -48,13 +48,13 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'rking/ag.vim'
 Plug 'henrik/vim-indexed-search'
 
+" Fuzzy file opener
+Plug 'ctrlpvim/ctrlp.vim'
+
 " Other
-Plug 'kien/ctrlp.vim'
 Plug 'mephux/vim-jsfmt'
-" Plug 'mileszs/ack.vim'
 Plug 'miyakogi/conoline.vim'
 Plug 'myusuf3/numbers.vim'
-Plug 'tmhedberg/matchit', { 'for': ['html', 'xml'] }
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -108,6 +108,9 @@ let g:netrw_special_syntax= 1
 " let g:netrw_list_hide= netrw_gitignore#Hide() " Hide gitignore & svn folders
 " let g:netrw_preview=1       " Make vertical splitting the default for previewing files
 " let g:netrw_winsize=30    " Split size in %
+
+" Ag always start searching from project root
+let g:ag_working_path_mode = 'ra' " 'r'
 
 " Powerline fancy symbols
 let g:airline_powerline_fonts = 1
@@ -197,22 +200,7 @@ set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\
 "set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:¬ " what to show when I hit :set list
 set so=2                " Keep 5 lines (top/bottom) for scope
 set laststatus=2        " always show the status line
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Wildmenu
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Make the Enter key select set wildmenu completion entry instead of creating
-" a new line
-"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" if has("wildmenu")
-"     set wildignore+=*.a,*.o
-"     set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
-"     set wildignore+=.DS_Store,.git,.hg,.svn
-"     set wildignore+=*~,*.swp,*.tmp
-"     set wildignore+=templates/compiled/**
-"     set wildmenu
-"     set wildmode=longest,list
-" endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Indent Related
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
