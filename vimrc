@@ -27,6 +27,7 @@ Plug 'ap/vim-css-color', { 'for': 'css' }
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 Plug 'evidens/vim-twig' ", { 'for': ['html', 'php', 'twig'] }
 Plug 'joshtronic/php.vim', { 'for': 'php' }
+Plug 'pangloss/vim-javascript', { 'for': 'js' }
 Plug 'tpope/vim-git', { 'for': 'git' }
 Plug 'tpope/vim-haml', { 'for': 'haml' }
 
@@ -96,7 +97,7 @@ let g:netrw_banner=0        " Hide ifo banner on startup
 let g:netrw_list_hide= netrw_gitignore#Hide() . '^\.svn\/$, ^\.sass-cache\/$' " Hide gitignore & svn folders
 let g:netrw_altv          = 1
 let g:netrw_fastbrowse    = 2
-let g:netrw_keepdir       = 0
+let g:netrw_keepdir       = 1
 let g:netrw_liststyle     = 0
 let g:netrw_retmap        = 1
 let g:netrw_silent        = 1
