@@ -1,4 +1,4 @@
-set nocompatible          " get out of horrible vi-compatible mode
+set nocompatible " get out of horrible vi-compatible mode
 " ----------------------------------------------------------------------------
 "   Plug
 " ----------------------------------------------------------------------------
@@ -33,7 +33,9 @@ Plug 'tpope/vim-haml', { 'for': 'haml' }
 
 " COMPLETION
 Plug 'mattn/emmet-vim' ", { 'for': ['html', 'php', 'twig'] }
-Plug 'Shougo/neocomplete.vim'
+Plug 'Valloric/YouCompleteMe'
+Plug 'Raimondi/delimitMate' " automatic closing of quotes, parenthesis, brackets, etc.
+" Plug 'Shougo/neocomplete.vim'
 
 " Make % match xml tags
 Plug 'tmhedberg/matchit' " , { 'for': ['html', 'xml', 'twig'] }
@@ -53,12 +55,15 @@ Plug 'henrik/vim-indexed-search'
 Plug 'ctrlpvim/ctrlp.vim'
 
 " Other
+Plug 'marijnh/tern_for_vim'
 Plug 'mephux/vim-jsfmt'
 Plug 'miyakogi/conoline.vim'
 Plug 'myusuf3/numbers.vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
+Plug 'tpope/vim-ragtag' " endings for html, xml, etc. - ehances surround
+Plug 'tpope/vim-repeat' " enables repeating other supported plugins with the . command
+Plug 'tpope/vim-surround' " mappings to easily delete, change and add such surroundings in pairs, such as quotes, parens, etc.
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/TaskList.vim'
 Plug 'xolox/vim-misc'
@@ -98,7 +103,7 @@ let g:netrw_list_hide= netrw_gitignore#Hide() . '^\.svn\/$, ^\.sass-cache\/$' " 
 let g:netrw_altv          = 1
 let g:netrw_fastbrowse    = 2
 let g:netrw_keepdir       = 1
-let g:netrw_liststyle     = 0
+let g:netrw_liststyle     = 3
 let g:netrw_retmap        = 1
 let g:netrw_silent        = 1
 let g:netrw_special_syntax= 1
@@ -154,7 +159,7 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
@@ -197,10 +202,15 @@ set showmatch           " show matching brackets
 set mat=5               " how many tenths of a second to blink matching brackets for
 set hlsearch            " highlight searched for phrases
 set incsearch           " do highlight as you type you search phrase
-set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\
-"set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:¬ " what to show when I hit :set list
 set so=2                " Keep 5 lines (top/bottom) for scope
 set laststatus=2        " always show the status line
+" toggle invisible characters
+set invlist
+set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+highlight SpecialKey ctermbg=none " make the highlighting of tabs less annoying
+set showbreak=↪
+"set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\
+"set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:¬ " what to show when I hit :set list
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Indent Related
@@ -272,6 +282,10 @@ nnoremap <F3> :NumbersToggle<CR>
 " Toggle paste mode
 set pastetoggle=<F2>
 
+" Vim scratch file
+" store for useful text, reusable stuff, code sections
+map <f4> :tabe ~/.vim/myfiles/store.txt<cr>
+imap <f4> :tabe ~/.vim/myfiles/store.txt<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Experimental
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
