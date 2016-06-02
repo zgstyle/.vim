@@ -204,13 +204,13 @@ set hlsearch            " highlight searched for phrases
 set incsearch           " do highlight as you type you search phrase
 set so=2                " Keep 5 lines (top/bottom) for scope
 set laststatus=2        " always show the status line
-" toggle invisible characters
-set invlist
+
+" set invlist " toggle invisible characters
 set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 highlight SpecialKey ctermbg=none " make the highlighting of tabs less annoying
-set showbreak=↪
-"set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\
-"set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:¬ " what to show when I hit :set list
+" set showbreak=↪
+" set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\
+" set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:¬ " what to show when I hit :set list
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Indent Related
@@ -300,17 +300,16 @@ autocmd InsertLeave * :setlocal hlsearch
 
 au BufEnter * :syntax sync fromstart " ensure every file does syntax highlighting (full)
 " Dont use cindent for CSS
-" au BufEnter *.scss set nocindent
-" au BufLeave *.scss set cindent
-au BufRead,BufNewFile *.haml,*.sass,*.scss setlocal softtabstop=2
-au BufRead,BufNewFile *.haml,*.sass,*.scss setlocal  shiftwidth=2
+" au BufRead,BufNewFile *.haml,*.sass,*.scss setlocal softtabstop=2
+" au BufRead,BufNewFile *.haml,*.sass,*.scss setlocal  shiftwidth=2
+au FileType *.haml,*.sass,*.scss setlocal ts=2 sts=2 sw=2 noexpandtab
 " We use special settings for HAML SCSS and SASS fieles
 au FileType sass,scss setlocal fdm=marker
 au FileType haml setlocal foldmethod=indent
 au FileType erb setlocal foldmethod=manual
 " Enable omnicomplete
-au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-au FileType html setlocal omnifunc=htmlcomplete#CompleteTags
+" au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" au FileType html setlocal omnifunc=htmlcomplete#CompleteTags
 " au FileType python setlocal omnifunc=pythoncomplete#Complete
 " au FileType php setlocal omnifunc=phpcomplete#CompletePHP
 " au FileType css setlocal omnifunc=csscomplete#CompleteCSS
